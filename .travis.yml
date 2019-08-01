@@ -18,12 +18,12 @@ env:
       - REMOTEAPPDIR=/var/www/light-it-08.tk/
       - REMOTEUSER=usr01
       - REMOTEHOST=188.166.54.169 # your droplet IP goes here
-      - PORT=8080
-apt:
-  sources:
-    - google-chrome
-  packages:
-    - google-chrome-stable
+      - PORT=54231
+#apt:
+#  sources:
+#    - google-chrome
+#  packages:
+#    - google-chrome-stable
 
 cache:
   directories:
@@ -39,10 +39,10 @@ install:
 #  - cd $TRAVIS_BUILD_DIR
 
 beforescript:
-  - chmod 600 usr01 && mv deploy ~/.ssh/authorized_keys_2
+  - chmod 600 deploy && mv deploy ~/.ssh/idrsa
 script:
-  - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
-  - hugo -d public
+#  - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
+  - ng build --prod
 
 deploy:
   - bash ./deploy.sh
