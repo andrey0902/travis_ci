@@ -1,27 +1,28 @@
 language: node_js
 node_js:
-  - '11.6.0'
-
-
+- 11.6.0
 branches:
   only:
-    - master
+  - master
 env:
   global:
-    - REMOTEAPPDIR=/var/www/light-it-08.tk/
-    - REMOTEUSER=usr01
-    - REMOTEHOST=188.166.54.169 # your droplet IP goes here
-    - PORT=54231
-
+  - REMOTEAPPDIR=/var/www/light-it-08.tk/
+  - REMOTEUSER=usr01
+  - REMOTEHOST=188.166.54.169
+  - PORT=54231
 script:
-  - npm install
-  - npm run build --prod
-  - chmod 600 deploy && mv deploy ~/.ssh/id_rsa
-  - chmod 600 deploy.pub && mv deploy.pub ~/.ssh/id_rsa.pub
-  - echo "hello world $REMOTEAPPDIR $REMOTEUSER $REMOTEHOST $PORT"
-  - ssh -o "StrictHostKeyChecking=no" -p$PORT $REMOTEUSER@$REMOTEHOST "ls -la"
-  - tar -czf package.tgz ./dist/travis
-  - ssh -o "StrictHostKeyChecking=no" -p$PORT $REMOTEUSER@$REMOTEHOST "rm -rf /var/www/light-it-08.tk/*"
-  - scp -P$PORT package.tgz $REMOTEUSER@$REMOTEHOST:/var/www/light-it-08.tk/
-  - ssh -p$PORT $REMOTEUSER@$REMOTEHOST "cd /var/www/light-it-08.tk/ && tar -xvf /var/www/light-it-08.tk/package.tgz "
-  - ssh -o "StrictHostKeyChecking=no" -p$PORT $REMOTEUSER@$REMOTEHOST "ls -la /var/www/light-it-08.tk/"
+- npm install
+- npm run build --prod
+- chmod 600 deploy && mv deploy ~/.ssh/id_rsa
+- chmod 600 deploy.pub && mv deploy.pub ~/.ssh/id_rsa.pub
+- echo "hello world $REMOTEAPPDIR $REMOTEUSER $REMOTEHOST $PORT"
+- ssh -o "StrictHostKeyChecking=no" -p$PORT $REMOTEUSER@$REMOTEHOST "ls -la"
+- tar -czf package.tgz ./dist/travis
+- ssh -o "StrictHostKeyChecking=no" -p$PORT $REMOTEUSER@$REMOTEHOST "rm -rf /var/www/light-it-08.tk/*"
+- scp -P$PORT package.tgz $REMOTEUSER@$REMOTEHOST:/var/www/light-it-08.tk/
+- ssh -p$PORT $REMOTEUSER@$REMOTEHOST "cd /var/www/light-it-08.tk/ && tar -xvf /var/www/light-it-08.tk/package.tgz
+  "
+- ssh -o "StrictHostKeyChecking=no" -p$PORT $REMOTEUSER@$REMOTEHOST "ls -la /var/www/light-it-08.tk/"
+before_install:
+- openssl aes-256-cbc -K $encrypted_81a46f29ae8f_key -iv $encrypted_81a46f29ae8f_iv
+  -in deploy.enc -out deploy -d
