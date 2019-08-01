@@ -13,9 +13,6 @@ env:
     - REMOTEHOST=188.166.54.169 # your droplet IP goes here
     - PORT=54231
 
-cache:
-  directories:
-    - ./node_modules
 
 install:
   - npm install --only=dev
