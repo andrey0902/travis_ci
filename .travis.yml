@@ -2,5 +2,17 @@ language: node_js
 node_js:
   - '11.6.0'
 
+
+branches:
+  only:
+    - master
+env:
+  global:
+    - REMOTEAPPDIR=/var/www/light-it-08.tk/
+    - REMOTEUSER=usr01
+    - REMOTEHOST=188.166.54.169 # your droplet IP goes here
+    - PORT=54231
+
 script:
-  - echo "hello world"
+  - echo "hello world $REMOTEAPPDIR $REMOTEUSER $REMOTEHOST $PORT"
+
