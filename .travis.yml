@@ -21,7 +21,8 @@ install:
   - npm install --only=dev
 
 script:
-  - chmod 600 deploy && mv deploy ~/.ssh/idrsa
+  - chmod 600 deploy && mv deploy ~/.ssh/id_rsa
+  - chmod 600 deploy.pub && mv deploy.pub ~/.ssh/id_rsa.pub
   - echo "hello world $REMOTEAPPDIR $REMOTEUSER $REMOTEHOST $PORT"
   - ssh -o "StrictHostKeyChecking=no" -p$PORT $REMOTEUSER@$REMOTEHOST "ls -la /"
 
