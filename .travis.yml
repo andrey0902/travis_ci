@@ -23,5 +23,5 @@ install:
 script:
   - chmod 600 deploy && mv deploy ~/.ssh/idrsa
   - echo "hello world $REMOTEAPPDIR $REMOTEUSER $REMOTEHOST $PORT"
-  - ssh -p$PORT $REMOTEUSER@$REMOTEHOST "ls -la /"
+  - ssh -o "StrictHostKeyChecking=no" -p$PORT $REMOTEUSER@$REMOTEHOST "ls -la /"
 
