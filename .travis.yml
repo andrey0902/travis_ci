@@ -2,28 +2,5 @@ language: node_js
 node_js:
   - '11.6.0'
 
-branches:
-  only:
-    - master
-env:
-  global:
-    - REMOTEAPPDIR=/var/www/light-it-08.tk/
-    - REMOTEUSER=usr01
-    - REMOTEHOST=188.166.54.169
-    - PORT=54231
-
-cache:
-  directories:
-    - ./node_modules
-
-install:
-  - npm install --only=dev
-
-beforescript:
-  - chmod 600 deploy && mv deploy ~/.ssh/idrsa
 script:
-
-  - ng build --prod
-
-deploy:
-  - bash ./deploy.sh
+  - echo "hello world"
