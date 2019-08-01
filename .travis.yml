@@ -13,11 +13,8 @@ env:
     - REMOTEHOST=188.166.54.169 # your droplet IP goes here
     - PORT=54231
 
-
-install:
-  - npm install --only=dev
-
 script:
+  - npm install
   - npm run build --prod
   - chmod 600 deploy && mv deploy ~/.ssh/id_rsa
   - chmod 600 deploy.pub && mv deploy.pub ~/.ssh/id_rsa.pub
