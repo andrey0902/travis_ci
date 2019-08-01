@@ -1,29 +1,19 @@
-#dist: trusty
-#sudo: false
-
 language: node_js
 node_js:
   - '11.6.0'
 
 addons:
-
-  ssh_known_hosts:
-  - 188.166.54.169
+  ssh_known_hosts: 188.166.54.169
 
 branches:
-    only:
-      - master
+  only:
+    - master
 env:
   global:
-      - REMOTEAPPDIR=/var/www/light-it-08.tk/
-      - REMOTEUSER=usr01
-      - REMOTEHOST=188.166.54.169 # your droplet IP goes here
-      - PORT=54231
-#apt:
-#  sources:
-#    - google-chrome
-#  packages:
-#    - google-chrome-stable
+    - REMOTEAPPDIR=/var/www/light-it-08.tk/
+    - REMOTEUSER=usr01
+    - REMOTEHOST=188.166.54.169
+    - PORT=54231
 
 cache:
   directories:
@@ -31,17 +21,11 @@ cache:
 
 install:
   - npm install --only=dev
-#  - export TRAVIS_BUILD_DIR=$(pwd)
-#  - mkdir $HOME/src
-#  - cd $HOME/src
-#  - git clone https://github.com/andrey0902/travis_ci.git
-#
-#  - cd $TRAVIS_BUILD_DIR
 
 beforescript:
   - chmod 600 deploy && mv deploy ~/.ssh/idrsa
 script:
-#  - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
+
   - ng build --prod
 
 deploy:
