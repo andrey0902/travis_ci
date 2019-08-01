@@ -1,36 +1,45 @@
-before_install:
-- openssl aes-256-cbc -K $encrypted_81a46f29ae8f_key -iv $encrypted_81a46f29ae8f_iv
-  -in travis_rsa.enc -out travis_rsa -d
-  - chmod 600 travis_rsa
-  - mv travis_rsa ~/.ssh/id_rsa
-
-dist: trusty
-sudo: false
+#dist: trusty
+#sudo: false
 
 language: node_js
 node_js:
   - '11.6.0'
 
 addons:
-  ssh_known_hosts: 188.166.54.169
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
+
+  ssh_known_hosts:
+  - 188.166.54.169
+
+branches:
+    only:
+      - master
+env:
+  global:
+      - REMOTEAPPDIR=/var/www/light-it-08.tk/
+      - REMOTEUSER=usr01
+      - REMOTEHOST=188.166.54.169 # your droplet IP goes here
+      - PORT=8080
+apt:
+  sources:
+    - google-chrome
+  packages:
+    - google-chrome-stable
 
 cache:
   directories:
     - ./node_modules
 
 install:
-  - export TRAVIS_BUILD_DIR=$(pwd)
-  - mkdir $HOME/src
-  - cd $HOME/src
-  - git clone https://github.com/andrey0902/travis_ci.git
-  - npm install
-  - cd $TRAVIS_BUILD_DIR
+  - npm install --only=dev
+#  - export TRAVIS_BUILD_DIR=$(pwd)
+#  - mkdir $HOME/src
+#  - cd $HOME/src
+#  - git clone https://github.com/andrey0902/travis_ci.git
+#
+#  - cd $TRAVIS_BUILD_DIR
 
+beforescript:
+  - chmod 600 usr01 && mv deploy ~/.ssh/authorized_keys_2
 script:
   - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
   - hugo -d public
