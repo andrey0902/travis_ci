@@ -23,9 +23,9 @@ env:
 beforescript:
   - chmod 600 deploy && mv deploy ~/.ssh/idrsa
 
-lanuage: bash
-  script:
-    - bash ./scripts/deploy.sh
+#lanuage: bash
+#  script:
+#    - bash ./scripts/deploy.sh
 
 #after_success:
 #  - "./scripts/deploy.sh"
