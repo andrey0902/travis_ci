@@ -1,3 +1,24 @@
 before_install:
 - openssl aes-256-cbc -K $encrypted_81a46f29ae8f_key -iv $encrypted_81a46f29ae8f_iv
   -in first_ssh.enc -out first_ssh -d
+
+language: node_js
+node_js:
+  - 11.6.0
+addons:
+  ssh_known_hosts:
+    - http://light-it-08.tk
+    - 188.166.54.169
+
+branches:
+  only:
+    - master
+env:
+  global:
+    - REMOTEAPPDIR=/var/www/light-it-08.tk/
+    - REMOTEUSER=usr01
+    - REMOTEHOST=188.166.54.169
+    - PORT=54231
+script:
+  - npm install
+  - npm run build --prod
