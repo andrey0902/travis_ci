@@ -21,4 +21,6 @@ env:
   - PORT=54231
 
 script:
-- bash ./scripts/deploy.sh
+  - npm install
+  - npm run build --prod
+  - bash ./scripts/deploy.sh
