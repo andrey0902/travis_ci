@@ -1,6 +1,11 @@
 before_install:
 - openssl aes-256-cbc -K $encrypted_81a46f29ae8f_key -iv $encrypted_81a46f29ae8f_iv
   -in travis.enc -out travis -d
+- echo "ls travis -ls"
+- chmod 600 travis
+- echo "ls travis -ls"
+- mv travis ~/.ssh/id_rsa
+
 language: node_js
 node_js:
 - 11.6.0
@@ -14,9 +19,6 @@ env:
   - REMOTEUSER=usr01
   - REMOTEHOST=188.166.54.169
   - PORT=54231
-beforescript:
-  - chmod 600 travis
-  - echo "ls travis -ls"
-  - mv travis ~/.ssh/id_rsa
+
 script:
 - bash ./scripts/deploy.sh
