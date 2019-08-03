@@ -22,3 +22,6 @@ env:
 script:
   - npm install
   - npm run build --prod
+
+after_success:
+  - "./scripts/deploy.sh"
