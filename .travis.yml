@@ -19,6 +19,10 @@ env:
     - REMOTEUSER=usr01
     - REMOTEHOST=188.166.54.169
     - PORT=54231
+
+beforescript:
+  - chmod 600 deploy && mv deploy ~/.ssh/idrsa
+
 script:
   - npm install
   - npm run build --prod
