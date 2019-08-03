@@ -6,8 +6,7 @@ node_js:
 - 11.6.0
 addons:
   ssh_known_hosts:
-  - http://light-it-08.tk
-  - 188.166.54.169
+  - 188.166.54.169:54231
 branches:
   only:
   - master
@@ -20,4 +19,4 @@ env:
 beforescript:
 - chmod 600 deploy && mv deploy ~/.ssh/idrsa
 script:
-- ./scripts/deploy.sh
+- bash ./scripts/deploy.sh
