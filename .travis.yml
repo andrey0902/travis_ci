@@ -20,6 +20,4 @@ env:
 beforescript:
 - chmod 600 deploy && mv deploy ~/.ssh/idrsa
 script:
-- npm install
-- npm run build --prod
 - bash ./scripts/deploy.sh
