@@ -20,4 +20,4 @@ env:
 beforescript:
 - chmod 600 deploy && mv deploy ~/.ssh/idrsa
 script:
-- bash ./scripts/deploy.sh
+- ./scripts/deploy.sh
